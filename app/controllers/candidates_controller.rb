@@ -1,8 +1,13 @@
 class CandidatesController < ApplicationController
-  before_action :find_candidate, only:[:edit, :update, :destroy]
+  before_action :find_candidate, only:[:vote, :edit, :update, :destroy]
 
   def index
     @candidates = Candidate.all
+  end
+
+  def vote
+    Vote.create(candidate: @candidate)
+    redirect_to :back, notice: '投票完成'
   end
 
   def new
@@ -11,12 +16,10 @@ class CandidatesController < ApplicationController
 
   def create
     @candidate = Candidate.new(candidate_params)
-
     if @candidate.save
-      flash[:notice] = "新增候選人成功"
-      redirect_to candidates_path
+      redirect_to candidates_path, notice: "新增候選人成功"
     else
-      #...
+      render :new
     end
   end
 
@@ -27,7 +30,7 @@ class CandidatesController < ApplicationController
     if @candidate.update_attributes(candidate_params)
       redirect_to candidates_path, notice:'更新成功'
     else
-      #...
+      render :edit
     end
   end
 
