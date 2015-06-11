@@ -5,5 +5,9 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :candidates
+  end
+
   root 'candidates#index'
 end

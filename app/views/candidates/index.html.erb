@@ -8,9 +8,6 @@
       <%= candidate.name %>
       <%= candidate.votes.size %>
       <%= link_to '投票', vote_candidate_path(candidate), method: :post, data:{confirm:'你確定嗎?'} %>
-
-      <%= link_to '更新', edit_candidate_path(candidate) %>
-      <%= link_to '刪除', candidate_path(candidate), method: :delete, data:{confirm:'你確定嗎?'} %>
     </li>
   <% end %>
 </ul>
